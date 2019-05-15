@@ -6,6 +6,7 @@ Importer les composants server
   const express = require('express');
   const ejs = require('ejs');
   const path = require('path');
+  const bodyParser = require('body-parser');
 
   // Modules server
   const frontRoutes = require('./routes/front.routes');
@@ -25,6 +26,10 @@ Configuration du server
 
   // Configuration du moteur de rendu
   server.set( 'view engine', 'ejs' );
+
+  // Configuration de body-parser
+  server.use(bodyParser.json({limit: '10mb'}));
+  server.use(bodyParser.urlencoded({ extended: true }));
 
   // Utilisation des routeurs
   server.use( '/api', apiRoutes );
